@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-NA: Майбутнє 2нм — ASML</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #ffae00; /* Золотистий акцент для майбутнього */
+            --bg-dark: #050608;
+            --card-bg: rgba(255, 174, 0, 0.03);
+            --text-bright: #ffffff;
+            --text-dim: #b0b0b0;
+        }
+
+        @keyframes elementEntrance {
+            0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        .hero-image, .top-nav, .sidebar, .content, footer {
+            opacity: 0;
+            animation: elementEntrance 1s ease-out forwards;
+        }
+
+        .hero-image { animation-delay: 0.1s; }
+        .top-nav    { animation-delay: 0.2s; }
+        .sidebar    { animation-delay: 0.3s; }
+        .content    { animation-delay: 0.4s; }
+
+        /* Шапка майбутнього */
+       .hero-image {
+    width: 100%;
+    height: 450px; /* Трохи збільшимо висоту */
+    background: 
+        /* Подвійний градієнт: зверху і знизу, щоб "затемнити" деталі фото */
+        linear-gradient(to bottom, rgba(5, 6, 8, 0.7) 0%, rgba(5, 6, 8, 0.4) 50%, var(--bg-dark) 100%), 
+        url('https://p.turbosquid.com/ts-thumb/m5/zkuAPS/Xo/z01/png/1702303628/1920x1080/fit_q87/92022f29e15d923b4bf0617433f5cf90de8f7dc5/z01.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 174, 0, 0.3);
+}
+
+.hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--text-bright);
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 174, 0, 0.4);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+}
+
+        /* Верхнє меню */
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 65px;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 174, 0, 0.3);
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: #888;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s;
+        }
+
+        .top-nav a:hover { color: var(--accent); }
+
+        /* Основна сітка */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            max-width: 1400px;
+            margin: 40px auto;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        /* Твоє оригінальне бічне меню */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 20px;
+            height: fit-content;
+            border: 1px solid rgba(255, 174, 0, 0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 { color: var(--accent); font-family: 'Orbitron'; margin-bottom: 20px; font-size: 16px; }
+        .sidebar a {
+            color: var(--text-dim);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+        .sidebar a:hover { color: var(--text-bright); padding-left: 8px; }
+
+        /* Контентна частина */
+        .content {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin: 40px 0 20px;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px); /* Розмиття фону за карткою */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 174, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+       .feature-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 174, 0, 0.08);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(255, 174, 0, 0.1);
+}
+
+        .feature-card h4 { color: var(--text-bright); margin-bottom: 10px; font-family: 'Orbitron'; font-size: 14px; }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .specs-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .spec-name { color: var(--accent); font-weight: bold; width: 40%; }
+
+        footer {
+            text-align: center;
+            padding: 60px;
+            border-top: 1px solid rgba(255, 174, 0, 0.2);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 900px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-image">
+        <h1 class="hero-title">High-NA EUV:<br>Ера Ангстремів</h1>
+    </header>
+
+    <nav class="top-nav">
+        <a href="pogekt.html">Головна</a> 
+        <a href="#vision">Концепція</a>
+        <a href="#tech">Специфікації</a>
+        <a href="#impact">Вплив на світ</a>
+    </nav>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <h3>МЕНЮ</h3>
+            <a href="pogekt.html"> Головна сторінка</a>
+            <a href="new.html"> маюбутнє EUV</a>
+            <a href="War.html"> Монополія</a>
+        </aside>
+
+        <main class="content">
+            <section class="section" id="vision">
+                <h2>Наступний гігантський стрибок</h2>
+                <p>Коли звичайна EUV-літографія досягне своєї межі, на зміну прийде <strong>High-NA (High Numerical Aperture)</strong>. Це не просто оновлення, це повна перебудова оптичної системи машини, яка дозволить друкувати транзистори, що у 1.7 раза менші за нинішні.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Точність 0.55 NA</h4>
+                        <p>Збільшення числової апертури з 0.33 до 0.55 дозволяє досягти небаченої роздільної здатності.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Чипи 2нм та нижче</h4>
+                        <p>Прямий шлях до техпроцесів Intel 18A та TSMC 2nm, що змінять уявлення про потужність.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Вартість прогресу</h4>
+                        <p>Одна машина EXE:5000 коштує понад $350 млн — це найдорожчий серійний прилад у світі.</p>
+                    </div>
+                </div>
+            </section>
+
+            
+
+            <section class="section" id="tech">
+                <h2>Технічні характеристики EXE:5000</h2>
+                <p>Нове покоління машин від ASML настільки велике, що для їх встановлення на заводах Intel та Samsung доводиться будувати нові корпуси з вищими стелями.</p>
+                
+                <table class="specs-table">
+                    <tr>
+                        <td class="spec-name">Продуктивність</td>
+                        <td>Понад 200 пластин на годину</td>
+                    </tr>
+                    <tr>
+                        <td class="spec-name">Роздільна здатність</td>
+                        <td>8 нанометрів (одиночна експозиція)</td>
+                    </tr>
+                    <tr>
+                        <td class="spec-name">Вага системи</td>
+                        <td>Понад 150 000 кг</td>
+                    </tr>
+                    <tr>
+                        <td class="spec-name">Оптична система</td>
+                        <td>Анаморфна оптика від Carl Zeiss</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="section" id="impact">
+                <h2>Чому це важливо для нас?</h2>
+                <p>Без High-NA EUV прогрес у сфері ШІ (штучного інтелекту) зупиниться. Для навчання моделей майбутнього, таких як GPT-6 чи нові версії Gemini, потрібні трильйони транзисторів, які можна розмістити лише на кристалах, створених новими машинами.</p>
+                <p style="margin-top: 20px; font-style: italic;">"High-NA — це ключ до того, щоб ваш смартфон у 2028 році був потужнішим за сучасний суперкомп'ютер."</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p style="color: var(--accent); font-family: 'Orbitron';">© Проект Сергія і Станіслава | Технології Майбутнього</p>
+    </footer>
+
+</body>
+</html>

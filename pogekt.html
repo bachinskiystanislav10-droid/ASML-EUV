@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASML EUV - Технологічний прорив</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #00d2ff;
+            --accent-dark: #0072ff;
+            --bg-dark: #0a0b10;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-bright: #ffffff;
+            --text-dim: #b0b0b0;
+        }
+
+        /* --- ОНОВЛЕНА АНІМАЦІЯ (ЗМЕНШЕНЕ РОЗМИТТЯ) --- */
+        @keyframes elementEntrance {
+            0% { 
+                opacity: 0; 
+                transform: translateY(20px); 
+                filter: blur(3px); /* Зменшено розмиття для чіткості */
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0); 
+                filter: blur(0); 
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dim);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Елементи з'являються окремо */
+        .hero-image, .top-nav, .sidebar, .content, footer {
+            opacity: 0;
+            animation: elementEntrance 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        }
+
+        /* Каскадна поява */
+        .hero-image { animation-delay: 0.1s; }
+        .top-nav    { animation-delay: 0.2s; }
+        .sidebar    { animation-delay: 0.3s; }
+        .content    { animation-delay: 0.4s; }
+        footer      { animation-delay: 0.5s; }
+
+        /* Шапка */
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom, rgba(10, 11, 16, 0.3), var(--bg-dark)), 
+                        url('https://edge.sitecorecloud.io/asmlnetherlaaea-asmlcom-prd-5369/media/project/asmlcom/asmlcom/asml/images/products/euv-lithography-systems/nxe3400_simplified_front_semiclosed.jpg?h=1080&iar=0&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text-bright);
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        /* Навігація */
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            background-color: #000000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 65px;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: #999; 
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 10px 0;
+            transition: 0.4s;
+        }
+
+        .top-nav a:hover { color: #ffffff; }
+
+        .top-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: 0; left: 50%;
+            background: #ffffff;
+            transition: 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .top-nav a:hover::after { width: 100%; }
+
+        .top-nav a:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            right: -25px; top: 50%;
+            transform: translateY(-50%);
+            width: 1px; height: 15px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Контентна сітка */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            max-width: 1400px;
+            margin: 40px auto;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            height: fit-content;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul { list-style: none; }
+        .sidebar li { margin-bottom: 15px; }
+        .sidebar a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+        }
+        .sidebar a:hover { color: var(--text-bright); transform: translateX(5px); }
+
+        .content {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section { 
+            margin-bottom: 80px; 
+            scroll-margin-top: 100px; 
+        }
+
+        .section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-bright);
+            margin-bottom: 25px;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: '';
+            width: 4px; height: 30px;
+            background: var(--accent);
+            margin-right: 15px;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .model-container {
+            width: 100%;
+            height: 500px;
+            background: radial-gradient(circle, #1a1c25 0%, #0a0b10 100%);
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        .highlight-box {
+            background: rgba(0, 210, 255, 0.07);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: #000;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 900px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-image">
+        <h1 class="hero-title">ASML EUV</h1>
+    </header>
+
+    <nav class="top-nav">
+        <a href="#tema1">Про систему</a>
+        <a href="#tema2">Причини розробки</a>
+        <a href="#tema3">Технологія процесу</a>
+    </nav>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <h3>МЕНЮ</h3>
+            <ul>
+                <li><a href="Avtor.html"> Історія розробки</a></li>
+                <li><a href="new.html"> маюбутнє EUV</a></li>
+                <a href="War.html"> Монополія</a>
+            </ul>
+        </aside>
+
+       <main class="content">
+            <section class="section" id="tema1">
+                <h2>Що таке ASML EUV?</h2>
+                <p>ASML EUV (Extreme Ultraviolet) — це вершина інженерної думки людства. Це установка для фотолітографії, яка використовує світло екстремально короткої довжини хвилі для «друку» мікросхем. Без цієї машини неможливо створити процесори за техпроцесом 7нм, 5нм та менше.</p>
+                
+                <div class="model-container">
+                    <model-viewer 
+                        src="model.glb" 
+                        alt="3D модель ASML" 
+                        auto-rotate 
+                        camera-controls 
+                        shadow-intensity="2" 
+                        environment-image="neutral"
+                        exposure="1.2"
+                        style="width: 100%; height: 100%;">
+                    </model-viewer>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>Ціна прогресу:</strong> Одна така установка коштує понад <strong>$150 000 000</strong>, складається з 100 000+ деталей та важить близько 180 тонн.</p>
+                </div>
+            </section>
+
+            <section class="section" id="tema2">
+                <h2>Межа фізичних можливостей</h2>
+                <p>Чому старі методи перестали працювати? Світ десятиліттями покладався на DUV-літографію (глибокий ультрафіолет). Але коли транзистори стали меншими за довжину хвилі світла, зображення почало «розмиватися».</p>
+                
+                <ul style="margin: 20px 0; padding-left: 20px;">
+                    <li><strong>Кінець закону Мура:</strong> Без переходу на EUV подвоєння кількості транзисторів стало б фізично неможливим.</li>
+                    <li><strong>Енергоефективність:</strong> Нові чіпи споживають на 30-50% менше енергії завдяки щільності розміщення елементів.</li>
+                    <li><strong>Продуктивність ШІ:</strong> Весь сучасний штучний інтелект працює на чіпах, створених саме цими машинами.</li>
+                </ul>
+                
+                
+            </section>
+
+            <section class="section" id="tema3">
+                <h2>Технологічне "диво": Як це працює</h2>
+                <p>Процес отримання EUV-випромінювання настільки складний, що його порівнюють із «пострілом у яблуко на Місяці з Землі».</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Генерація плазми</h4>
+                        <p style="font-size: 14px;">Лазер CO2 потужністю 30 кВт стріляє у краплю олова, що летить зі швидкістю 250 км/год. Це відбувається двічі: перший імпульс сплющує краплю, другий — випаровує її в плазму.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Найрівніші дзеркала</h4>
+                        <p style="font-size: 14px;">Оскільки EUV-світло поглинається склом, замість лінз використовуються дзеркала Zeiss. Їхня поверхня настільки ідеальна, що найбільша нерівність не перевищує розміру одного атома.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <strong>Цікавий факт:</strong> Весь шлях світла має проходити у глибокому вакуумі, тому що навіть повітря здатне повністю поглинути EUV-промені.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Масштаби виробництва</h2>
+                <p>ASML — єдина компанія у світі (монополіст), що володіє цією технологією. Для доставки однієї машини замовнику (наприклад, Intel або TSMC) потрібно:</p>
+                <div style="border-left: 2px solid var(--accent); padding-left: 20px; margin-top: 20px;">
+                    <p> <strong>3 літаки Boeing 747</strong></p>
+                    <p> <strong>40 вантажівок</strong></p>
+                    <p> <strong>Рік налаштування</strong> командою інженерів</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p style="color: var(--accent); font-family: 'Orbitron';">© Сайт Сергія і Станіслава | 2026</p>
+    </footer>
+
+</body>
+</html>

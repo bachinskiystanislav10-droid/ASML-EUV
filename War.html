@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASML: Монополія та Чіпові війни</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #ff4b2b;
+            --bg-dark: #0a0b10;
+            --card-bg: rgba(255, 75, 43, 0.05);
+            --text-bright: #ffffff;
+            --text-dim: #b0b0b0;
+        }
+
+        @keyframes elementEntrance {
+            0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        .hero-image, .top-nav, .sidebar, .content, footer {
+            opacity: 0;
+            animation: elementEntrance 1s ease-out forwards;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(to bottom, rgba(10, 11, 16, 0.8), var(--bg-dark)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 6vw, 3.5rem);
+            color: var(--text-bright);
+            text-shadow: 0 0 30px rgba(255, 75, 43, 0.6);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 65px;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 75, 43, 0.3);
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: #888;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s;
+        }
+
+        .top-nav a:hover { color: var(--accent); }
+
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            max-width: 1400px;
+            margin: 40px auto;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 20px;
+            height: fit-content;
+            border: 1px solid rgba(255, 75, 43, 0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 { color: var(--accent); font-family: 'Orbitron'; margin-bottom: 20px; font-size: 16px; }
+        .sidebar a {
+            color: var(--text-dim);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+        .sidebar a:hover { color: var(--text-bright); transform: translateX(5px); }
+
+        .content {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 60px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-bright);
+            margin: 45px 0 25px;
+            border-left: 5px solid var(--accent);
+            padding-left: 20px;
+            font-size: 26px;
+        }
+
+        .info-box {
+            background: rgba(255, 75, 43, 0.07);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 75, 43, 0.2);
+            margin: 30px 0;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 15px;
+            border-top: 2px solid var(--accent);
+        }
+
+        .stat-value {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .sub-heading {
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            margin: 25px 0 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px;
+            border-top: 1px solid rgba(255, 75, 43, 0.2);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 900px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-image">
+        <h1 class="hero-title">Геополітика <br> та Монополія</h1>
+    </header>
+
+    <nav class="top-nav">
+        <a href="pogekt.html">Головна</a> 
+        <a href="#bottleneck">Стратегія</a>
+        <a href="#war">Конфлікт</a>
+        <a href="#future">Наслідки</a>
+    </nav>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <h3>МЕНЮ</h3>
+            <a href="pogekt.html"> Головна сторінка</a>
+            <a href="Avtor.html"> Історія розробки</a>
+            <a href="new.html"> маюбутнє EUV</a>
+        </aside>
+
+        <main class="content">
+            <section id="bottleneck">
+                <h2>ASML як "Вузьке місце" цивілізації</h2>
+                <p>У глобальній економіці існує поняття "chokepoint" (вузьке місце) — критична точка, через яку змушені проходити всі. Для напівпровідникової індустрії такою точкою є ASML. Без їхніх EUV-систем жодна компанія у світі — ні TSMC в Тайвані, ні Intel у США, ні Samsung у Кореї — не може виготовити процесори останнього покоління.</p>
+                
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">0</span>
+                        <p>Конкурентів у світі</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">5000+</span>
+                        <p>Постачальників компонентів</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">180 тонн</span>
+                        <p>Вага однієї установки</p>
+                    </div>
+                </div>
+
+                <p>Монополія ASML не є наслідком агресивного поглинання конкурентів. Це результат 40 років ризикованих інвестицій. Коли на початку 2000-х японські гіганти Nikon та Canon відмовилися від розробки EUV через високу складність, ASML пішла ва-банк. Сьогодні вони збирають плоди цієї сміливості.</p>
+            </section>
+
+            
+
+            <section id="war">
+                <h2>Чіпові війни: Битва за майбутнє</h2>
+                <p>Сучасні війни виграються не лише танками, а й обчислювальними потужностями. Ракети, системи РЕБ, безпілотники та алгоритми ШІ потребують передових чипів. Саме тому контроль над поставками обладнання ASML став ключовим інструментом зовнішньої політики США.</p>
+                
+                <div class="info-box">
+                    <h3 class="sub-heading">Чому Китай не може скопіювати ASML?</h3>
+                    <p>Машина ASML — це не просто залізо. Це екосистема. Дзеркала постачає німецька Zeiss, лазери — американська Cymer, а програмне забезпечення пишеться десятиліттями. Пекіну потрібно відтворити не одну компанію, а весь ланцюжок поставок, що охоплює 5000 вузькоспеціалізованих підприємств по всьому світу.</p>
+                </div>
+
+                <h3 class="sub-heading">Експортні обмеження</h3>
+                <p>У 2023-2024 роках уряд Нідерландів під тиском Білого дому запровадив безпрецедентні санкції. Тепер ASML заборонено продавати Китаю навіть попередні моделі літографічних систем (DUV), не кажучи вже про новітні EUV. Це фактично "заморозило" здатність Китаю виробляти чипи тонше 7 нанометрів на власному обладнанні.</p>
+            </section>
+
+            <section id="future">
+                <h2>Економічна зброя чи науковий прогрес?</h2>
+                <p>Така ситуація створює небезпечний прецедент. З одного боку, демократичний світ намагається стримати розвиток авторитарних режимів. З іншого — політизація ASML уповільнює загальний прогрес людства, оскільки величезний ринок Китаю відрізаний від інновацій.</p>
+                
+                <p style="margin-top: 20px;">Для самої компанії ASML це також виклик. Китай забезпечував до 20-30% їхньої виручки. Втрата такого ринку змушує компанію ще більше піднімати ціни на нові установки High-NA для західних клієнтів, що врешті-решт впливає на ціну кожного нового смартфона чи ноутбука для кінцевого споживача.</p>
+
+                <div class="info-box" style="border-right: 4px solid var(--accent); border-left: none;">
+                    <strong>Висновок:</strong> Сьогоднішні "чіпові війни" — це не просто суперечка про торгівлю. Це боротьба за те, хто буде визначати правила гри в епоху штучного інтелекту. І ASML у цій грі є головним козирем.
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p style="color: var(--accent); font-family: 'Orbitron';">© Проект Сергія і Станіслава | Аналітика 2026</p>
+    </footer>
+
+</body>
+</html>

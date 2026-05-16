@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автор технології — ASML EUV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #00d2ff;
+            --bg-dark: #0a0b10;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-bright: #ffffff;
+            --text-dim: #b0b0b0;
+        }
+
+        /* Анімація */
+        @keyframes elementEntrance {
+            0% { opacity: 0; transform: translateY(25px); filter: blur(3px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dim);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .hero-image, .top-nav, .sidebar, .content, footer {
+            opacity: 0;
+            animation: elementEntrance 1.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+        }
+
+        .hero-image { animation-delay: 0.2s; }
+        .top-nav    { animation-delay: 0.4s; }
+        .sidebar    { animation-delay: 0.6s; }
+        .content    { animation-delay: 0.8s; }
+
+        /* Шапка */
+        .hero-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(to bottom, rgba(10, 11, 16, 0.5), var(--bg-dark)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--text-bright);
+            text-shadow: 0 0 15px var(--accent);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* Навігація зверху */
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            background-color: #000000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 65px;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: #999;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .top-nav a:hover { color: #fff; }
+        .top-nav a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -5px; left: 50%; background: #fff;
+            transition: 0.3s; transform: translateX(-50%);
+        }
+        .top-nav a:hover::after { width: 100%; }
+
+        /* Контент */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            max-width: 1400px;
+            margin: 40px auto;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            height: fit-content;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            color: var(--text-bright);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar a {
+            color: var(--text-dim);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover { color: var(--text-bright); transform: translateX(5px); }
+
+        .content {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Картка автора */
+        .author-card {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            background: rgba(0, 210, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 210, 255, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .author-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: url('https://tse3.mm.bing.net/th/id/OIP.mI3dGhxpGoLaEAGB4Uc33gHaDn?rs=1&pid=ImgDetMain&o=7&rm=3') center/cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-bright);
+            margin: 40px 0 20px;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        /* Таблиця */
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        .timeline-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .year { color: var(--accent); font-weight: bold; font-family: 'Orbitron'; width: 100px; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #000;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 800px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .author-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-image">
+        <h1 class="hero-title">Історія розробки EUV</h1>
+    </header>
+
+<nav class="top-nav">
+        <a href="pogekt.html">Головна</a> 
+        <a href="#author">Творці</a>
+        <a href="#barriers">Бар'єри</a>
+        <a href="#future">Майбутнє</a>
+    </nav>
+
+    <div class="main-wrapper">
+        <aside class="sidebar">
+            <h3>МЕНЮ</h3>
+            <a href="pogekt.html"> Головна сторінка</a>
+            <a href="new.html"> маюбутнє EUV</a>
+            <a href="War.html"> Монополія</a>
+        </aside>
+
+      <main class="content">
+            <section class="section" id="author">
+                <h2>Батько м'якого рентгену</h2>
+                <div class="author-card">
+                    <div class="author-photo"></div>
+                    <div>
+                        <h3 style="color: var(--text-bright); font-family: 'Orbitron'; margin-bottom: 10px;">Hiroo Kinoshita</h3>
+                        <p>Японський вчений, який у 1986 році здійснив неможливе. Використовуючи синхротронне випромінювання, він вперше продемонстрував літографію з довжиною хвилі 13.5 нм. У той час, коли весь світ працював з видимим світлом, Кіношіта зазирнув у майбутнє на 30 років вперед.</p>
+                    </div>
+                </div>
+                <p>Його ідея полягала в тому, що для створення менших транзисторів потрібен коротший "олівець". Оскільки EUV-світло поглинається навіть повітрям, йому довелося розробляти систему, що працює у повному вакуумі з використанням багатошарових дзеркал замість лінз.</p>
+            </section>
+
+            
+
+            <section class="section" id="timeline">
+                <h2>Шлях довжиною у 40 років</h2>
+                <table class="timeline-table">
+                    <tr><td class="year">1980-ті</td><td>Перші лабораторні експерименти в Японії та США (Bell Labs).</td></tr>
+                    <tr><td class="year">1997</td><td>Створення консорціуму EUV LLC за участі Intel, AMD та Motorola.</td></tr>
+                    <tr><td class="year">2006</td><td>ASML випускає перший прототип (Alpha Demo Tool).</td></tr>
+                    <tr><td class="year">2019</td><td>Масове виробництво чипів за допомогою EUV для iPhone 11.</td></tr>
+                </table>
+            </section>
+
+            <section class="section" id="barriers">
+                <h2>Чому це було так важко?</h2>
+                <p>Технологія EUV вважається найскладнішою інженерною розробкою в історії людства. Ось лише кілька проблем, які вирішували тисячі інженерів:</p>
+                <ul style="margin-left: 20px; margin-top: 15px;">
+                    <li><strong>Джерело світла:</strong> Щоб отримати EUV, лазер стріляє у краплю розплавленого олова 50 000 разів на секунду.</li>
+                    <li><strong>Дзеркала:</strong> Лінзи не працюють (світло просто зникає в склі). Були створені найгладші дзеркала у світі від компанії Zeiss. Якби вони були розміром з Німеччину, найбільша нерівність на них була б менше міліметра.</li>
+                    <li><strong>Вакуум:</strong> Навіть одна молекула кисню може зіпсувати процес, тому вся машина працює у глибокому вакуумі.</li>
+                </ul>
+            </section>
+
+            <section class="section" id="asml">
+                <h2>Монополія геніальності: ASML</h2>
+                <p>Сьогодні нідерландська компанія <strong>ASML</strong> є єдиним у світі виробником цих машин. Одна така установка коштує понад $150–350 мільйонів, важить 180 тонн і перевозиться трьома літаками Boeing 747.</p>
+                <div class="highlight-box">
+                    <p><strong>Цікавий факт:</strong> Кожна EUV-машина містить понад 100 000 компонентів і потребує сервісу, який можуть забезпечити лише спеціально навчені інженери. Це не просто інструмент, це вершина людської цивілізації.</p>
+                </div>
+            </section>
+
+            <section class="section" id="future">
+                <h2>Майбутнє: High-NA EUV</h2>
+                <p>Історія не зупиняється. Зараз ASML розробляє наступне покоління — <strong>High-NA EUV</strong>. Ці машини дозволять перейти межу у 2 нанометри, відкриваючи шлях до неймовірних потужностей штучного інтелекту та квантових обчислень.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p style="color: var(--accent); font-family: 'Orbitron'; margin-bottom: 10px;">© Сайт Сергія і Станіслава | 2026</p>
+        <p style="font-size: 12px; opacity: 0.5;">Розроблено для освітніх цілей про напівпровідникову індустрію</p>
+    </footer>
+
+</body>
+</html>
